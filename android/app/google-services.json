@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "342744300286",
+    "project_id": "twitterlike-fdefa",
+    "storage_bucket": "twitterlike-fdefa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:342744300286:android:fdd68485aab7e1e2c383af",
+        "android_client_info": {
+          "package_name": "com.twitterlike"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "342744300286-hkgfldm2rd18r8jjdv8kdfmr8mrb5q4v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZ9lJ8UT_DQfBjFgD_CBjLXi-FUJAXWo0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "342744300286-hkgfldm2rd18r8jjdv8kdfmr8mrb5q4v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
