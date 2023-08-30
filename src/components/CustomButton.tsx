@@ -35,7 +35,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
         style={[
           styles.text,
           {
-            color: variant === 'primary' ? colors.white : colors.primary,
+            color: variant === 'primary' ? colors.white : colors.white,
           },
         ]}>
         {title}

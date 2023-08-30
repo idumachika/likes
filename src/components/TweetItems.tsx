@@ -1,5 +1,6 @@
 import React from 'react';
-import {FlatList, View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import { FlatList, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import CommentTweet from '../components/CommentTweet'
 
 interface Content {
   id: number;
@@ -19,8 +20,10 @@ const TweetItems: React.FC<Props> = ({tweet, likeTweet, commentTweet}) => {
       <TouchableOpacity onPress={() => likeTweet(item.id)}>
         <Text>{`${item.likes} Likes`}</Text>
       </TouchableOpacity>
+      <CommentTweet tweetId={item.id} commentTweet={commentTweet} />
     </View>
   );
+
   return (
     <FlatList
       data={tweet}

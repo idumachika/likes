@@ -15,6 +15,7 @@ import {
   doc,
   updateDoc,
   increment,
+  getDoc,
 } from 'firebase/firestore';
 import {auth, fireStore} from '../util/fireBase';
 import {getAuth, onAuthStateChanged} from 'firebase/auth';
@@ -34,6 +35,12 @@ interface Tweet {
 }
 interface TweetsScreenProps {
   fireStore: firebase.firestore.Firestore;
+}
+interface Comment {
+  id: string;
+  text: string;
+  userId: string;
+  createdAt: Date;
 }
 
 const schema = z.object({
@@ -84,8 +91,12 @@ const TweetsScreen: React.FC<TweetsScreenProps> = () => {
         };
 
         const tweetsCollectionRef = collection(fireStore, 'tweets');
+        setIsLoading(false);
+
         addDoc(tweetsCollectionRef, newTweet)
-          .then(docRef => {})
+          .then(docRef => {
+            setIsLoading(false);
+          })
           .catch(error => {})
           .finally(() => {
             setIsLoading(false);
@@ -96,8 +107,8 @@ const TweetsScreen: React.FC<TweetsScreenProps> = () => {
     }
   };
 
-    const likeTweet = (tweetId: string) => {
-      console.log('=====tweetId', tweetId);
+  const likeTweet = (tweetId: string) => {
+    console.log('=====tweetId', tweetId);
     const tweetRef = doc(fireStore, 'tweets', tweetId);
 
     updateDoc(tweetRef, {
@@ -111,8 +122,29 @@ const TweetsScreen: React.FC<TweetsScreenProps> = () => {
       });
   };
 
-  // Use the same useEffect from Task 2 to get real-time updates
+  const commentTweet = async (tweetId: string, commentText: string) => {
+    if (commentText.trim() !== '') {
+      const userId = await AsyncStorage.getItem('userId');
 
+      if (userId) {
+        const newComment: Comment = {
+          id: Date.now().toString(),
+          text: commentText,
+          userId: userId,
+          createdAt: new Date(),
+        };
+
+        const tweetRef = doc(fireStore, 'tweets', tweetId);
+        const tweetSnapshot = await getDoc(tweetRef);
+        const currentComments = tweetSnapshot.data()?.comments || [];
+        const updatedComments = [...currentComments, newComment];
+
+        await updateDoc(tweetRef, {comments: updatedComments});
+      } else {
+        console.log('User not authenticated');
+      }
+    }
+  };
   return (
     <View style={styles.container}>
       <View style={styles.formContainer}>
@@ -132,7 +164,11 @@ const TweetsScreen: React.FC<TweetsScreenProps> = () => {
         />
       </View>
 
-      <TweetItems tweet={tweets} likeTweet={likeTweet} />
+      <TweetItems
+        tweet={tweets}
+        likeTweet={likeTweet}
+        commentTweet={commentTweet}
+      />
     </View>
   );
 };

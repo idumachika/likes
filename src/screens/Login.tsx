@@ -88,7 +88,7 @@ const Login: React.FC<LoginProps> = ({navigation}) => {
         />
         <Button
           title={
-            isLoading ? <ActivityIndicator color={colors.black} /> : 'Sign in'
+            isLoading ? <ActivityIndicator color={colors.white} /> : 'Sign in'
           }
           backgroundColor={'#0074D9'}
           textColor={'#fff'}

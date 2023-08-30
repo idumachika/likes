@@ -6,7 +6,7 @@ export const fonts = {
 };
 
 export const colors = {
-  primary: '#fff',
+  primary: '#0898A0',
   error: '#F34040',
   black: '#000000',
   soft_neutral: '#71879C',
