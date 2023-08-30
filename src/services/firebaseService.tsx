@@ -7,9 +7,7 @@ export const registerUser = async (email: string, password: string) => {
       email,
       password,
     );
-    console.log('userRegister', userRegister);
   } catch (error) {
-    console.error('Registration error:', error);
   }
 };
 
@@ -20,7 +18,6 @@ export const loginUser = async (email: string, password: string) => {
       password,
     );
     const user = userCredential.user;
-    console.log('======', userCredential);
     await AsyncStorage.setItem('userId', user.uid);
   } catch (error) {
     return error;

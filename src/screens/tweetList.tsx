@@ -69,7 +69,6 @@ const TweetsScreen: React.FC<TweetsScreenProps> = () => {
       querySnapshot.forEach(doc => {
         tweetsData.push({id: doc.id, ...doc.data()});
       });
-      console.log('tweetsData', tweetsData);
       setTweets(tweetsData);
     });
 
@@ -102,23 +101,19 @@ const TweetsScreen: React.FC<TweetsScreenProps> = () => {
             setIsLoading(false);
           });
       } else {
-        console.log('User not authenticated');
       }
     }
   };
 
   const likeTweet = (tweetId: string) => {
-    console.log('=====tweetId', tweetId);
     const tweetRef = doc(fireStore, 'tweets', tweetId);
 
     updateDoc(tweetRef, {
       likes: increment(1),
     })
       .then(() => {
-        console.log('likes updated successfully.');
       })
       .catch(error => {
-        console.error('Error updating likes:', error);
       });
   };
 
@@ -141,7 +136,6 @@ const TweetsScreen: React.FC<TweetsScreenProps> = () => {
 
         await updateDoc(tweetRef, {comments: updatedComments});
       } else {
-        console.log('User not authenticated');
       }
     }
   };

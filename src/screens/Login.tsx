@@ -56,10 +56,8 @@ const Login: React.FC<LoginProps> = ({navigation}) => {
         setIsLoading(true);
         const loginError = await loginUser(email, password);
         if (!loginError) {
-          console.log('Login successful', loginError);
           navigation.navigate('TweetList');
         } else {
-          console.log('Error occurred:', loginError);
           setError('Login failed. Please check your credentials.');
         }
       } catch (error) {

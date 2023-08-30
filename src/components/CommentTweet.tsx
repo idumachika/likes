@@ -15,7 +15,6 @@ interface Props {
   commentTweet: (content: Content, commentText: string) => void;
 }
 const CommentForm: React.FC<Props> = ({ tweetId, commentTweet }) => {
-    console.log('tweetId===', tweetId);
   const [commentText, setCommentText] = useState('');
 
   const handleSubmit = () => {
