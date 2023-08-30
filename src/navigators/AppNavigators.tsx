@@ -10,25 +10,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Stack = createNativeStackNavigator();
 const AppNavigation = () => {
-  const [userAuthenticated, setUserAuthenticated] = useState('');
 
-    useEffect(() => {
-      // Check user's authentication status from AsyncStorage
-      const checkAuthStatus = async () => {
-        try {
-          const isAuthenticated = await AsyncStorage.getItem('userId');
-          setUserAuthenticated(isAuthenticated);
-        } catch (error) {
-          console.error('Error checking auth status:', error);
-        }
-      };
-
-      checkAuthStatus();
-    }, []);
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName={userAuthenticated ? 'TweetList' : 'Login'}>
+        initialRouteName={'Login'}>
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Register" component={Register} />
         <Stack.Screen name="TweetList" component={TweetList} />
